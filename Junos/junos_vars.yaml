@@ -1,0 +1,15 @@
+loopback: 192.1680.74
+local_asn: 104
+neighbor:
+  - interface: xe-0/0/0:0
+    name: Hola
+    asn: 109
+    peer_ip: 192.168.0.1
+    local_ip: 192.168.0.0
+    peer_loopback: 192.179.0.95
+  - interface: xe-0/0/0:1
+    name: Hola
+    asn: 110
+    peer_ip: 192.168.0.2
+    local_ip: 192.168.0.3
+    peer_loopback: 192.179.0.73

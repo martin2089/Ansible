@@ -1,0 +1,33 @@
+# Aplica la configuracion en el equipo Junos
+- name: push-config
+  hosts: junos
+  roles:
+    - juniper.junos
+  connection: local
+  gather_facts: no
+  # Cargo las credenciales del equipos manualmente
+  vars_prompt:
+    - name: username
+      prompt: Username
+      private: no
+    - name: password
+      prompt: Password
+      private: Yes 
+  vars:
+    tmp_dir: "/home/martin/ansible/playbooks/Junos"
+    conf_file: "{{ tmp_dir }}/conf_junos.conf"
+  # Defino las tareas a realizar
+  tasks:
+    - name: install configuration
+      juniper_junos_config:
+        host: "{{ inventory_hostname }}"
+        user: "{{ username }}"
+        passwd: "{{ password }}"
+        src: "{{ conf_file }}"
+        timeout: 120
+        ignore_warning: true
+        load: "merge"
+        format: text
+        check_commit_wait: 4
+        check: true
+        commit: true

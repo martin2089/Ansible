@@ -1,0 +1,12 @@
+# Para aplicar la config en el Junos
+- name: build-config
+  hosts: localhost
+  # Cargo el archivo con las variables
+  vars_files: 
+    - /home/martin/ansible/playbooks/Junos/junos_vars.yml
+  # Defino las tareas a realizar
+  tasks:
+    - name: Load a configuration from a Jinja2 template and commit
+      template:
+        src: "/home/martin/ansible/playbooks/Junos/template_junos.j2"
+        dest: "/home/martin/ansible/playbooks/Junos/config_junos.conf"
